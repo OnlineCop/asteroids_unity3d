@@ -1,0 +1,40 @@
+# Source files: c-sharp, obj-c, javascript
+*.aspx      text
+*.browser   text
+*.c         text
+*.config    text
+*.cpp       text
+*.cs        text diff=csharp
+*.csproj    text merge=union
+*.go        text diff=java
+*.h         text
+*.ini       text
+*.js        text
+*.m         text
+*.map       text
+*.md        text
+*.mm        text
+*.ncp       text
+*.sln       text merge=union
+*.tex       text diff=tex
+*.xml       text
+
+# Images
+*.jpg       binary
+*.png       binary
+
+# Unity-specific files
+*.mat       text
+*.meta      text
+*.prefab    text
+*.unity     text
+*.unityproj text
+
+# True binaries
+*.db        binary
+*.dll       binary
+*.fbx       binary
+
+# Could go either way; better safe than sorry
+*.asset     text
+*.assets    text

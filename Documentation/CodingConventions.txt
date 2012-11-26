@@ -1,0 +1,149 @@
+NAMING CONVENTIONS:
+
+Functions and variables both use camel case.
+
+Functions start with an uppercase letter and each new word has an uppercase letter:
+
+    void AddObjectToCollection()
+
+Variables start with a lowercase letter and each new word has an uppercase letter:
+
+    GameObject objectPrefab;
+
+Scope does not change the rules for either functions or variables:
+
+    private void SomePublicMethod()
+    public void MyPersonalPrivateMethod(float memberVariable)
+
+    private thisVariable;
+    public thatVariable;
+
+Private variables that are counterparts to public variables that have getters/setters are prepended with an underscore:
+
+    private int _screenWidth;
+    public int screenWidth { get { return _screenWidth; } set { if (_screenWidth != value) _screenWidth = value; } }
+
+
+COMMENTING CONVENTIONS:
+
+Use Doxygen-styled comment blocks before classes and each class method, with a minimum of a @brief statement:
+
+    /**
+    * @brief Opens igloos and exposes the gooey innards.
+    * @details Eskimo can opener, finds those hard-to-reach man-cowards that love
+    * to hide in the safety of packed snow forts.
+    */
+    public class DestroyerOfIgloos
+    {
+        /**
+         * @brief Let none escape.
+         */
+        void DestroyThemAll()
+
+Exposed public (and protected) variables should have the same @brief comments, but can be kept to a single line:
+
+    /** @brief Nod to Hitchhiker's Guide. */
+    public int answerToLifeUniverseEverything;
+
+It would be nice, but not required, to have comments by private variables as well, but as these are not exposed to the user, Doxygen doesn't output them.
+
+
+BRACES AND BRACKETS:
+
+Put a space between selection keywords and its opening brace:
+
+    if (something)
+    else if (something)
+    switch (something)
+    for (;;)
+    foreach (something in somethingElse)
+    while (something)
+    return (a complex something that requires braces; not needed if single keyword)
+
+Put all brackets on the line following the selection keyword, same indentation level, even if the expression branches over several lines:
+
+    if (something)
+    {
+        // Indent next line to here
+    }
+    else if ((something that spans multiple lines) &&
+             (would be too long to fit on the line otherwise) ||
+             (would just look better broken apart than to assume the player has a very wide monitor))
+    {
+        // Indent next line to here
+    }
+    else
+    {
+        // Indent next line to here
+    }
+
+    for (;;)
+    {
+        // Indent next line to here
+    }
+
+Brackets should be used regardless of whether there is one line to follow or multiple:
+
+    if (wasDestroyed)
+        Destroy(gameObject);    // Wrong
+    
+    if (wasDestroyed)
+    {
+        Destroy(gameObject);    // Right
+    }
+
+
+TABS VS SPACES:
+
+Indent with tabs.
+Align with spaces where practical.
+
+Viewing this in any tab-agnostic application (where tabs can be 2, 3, 4, 8), everything should align properly:
+
+    if (two_tabs)
+    {
+      // This line should start here
+      // This line should be on the same line as the one above
+    }
+    else if (three_tabs)
+    {
+       // This line should start here
+       // This line should be on the same line as the one above
+    }
+    else if (four_tabs)
+    {
+        // This line should start here
+        // This line should be on the same line as the one above
+    }
+    else if (five_tabs)
+    {
+         // This line should start here
+         // This line should be on the same line as the one above
+    }
+    else if (eight_tabs)
+    {
+            // This line should start here
+            // This line should be on the same line as the one above
+    }
+    else if (forty_tabs)
+    {
+                                            // Now you're just being ridiculous
+                                            // But at least it's still aligned
+    }
+
+This text file did not include tab characters, just to indicate the indentation level.
+
+When you have a block that should be aligned (such as a comment block), indent first with tabs, and use spaces to line up the text:
+
+    if (something)
+    {
+    -->|Foo();          // Tabs ( -->| ) indent the line, then we start
+    -->|Bar();          // a comment block pretty far in by using spaces
+    -->|Baz();          // for the alignment of that block.
+    -->|SuperFizzy();   // This way, shorter lines don't need more tabs and
+    -->|if (bar)        // longer lines don't need fewer tabs.
+    -->|{               // ...careful here...
+    -->|-->|return;       // Extra tabs could mis-align blocks you would otherwise expect to be aligned, like if they were set to '8' where your code expected '4'
+    -->|}               // ... and we're back to the old alignment...
+
+Notice that the second-to-last line COULD misalign space-aligned comment blocks if different tab stops are used.
