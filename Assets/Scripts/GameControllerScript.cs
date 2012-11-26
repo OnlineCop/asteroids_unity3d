@@ -99,9 +99,9 @@ public class GameControllerScript : MonoBehaviour
 	}
 	
 	
-	void UserInputPlay()
+	void UserInputPlay(KeyCode srcKey)
 	{
-		if (Input.GetKey(KeyCode.Space))
+		if (srcKey == KeyCode.Space)
 		{
 			Debug.Log("SPACE was pressed during " + GameStateScript.gameState + " state.");
 		}
@@ -226,7 +226,6 @@ public class GameControllerScript : MonoBehaviour
 			
 			this.AddAsteroid(newAsteroid);
 		}
-		
 		GameStateScript.UserInputPlay += UserInputPlay;
 	}
 	
@@ -309,6 +308,18 @@ public class GameControllerScript : MonoBehaviour
 	
 	void OnGUI()
 	{
+		List<KeyCode> KeyList = new List<KeyCode>();
+		KeyList.Add (KeyCode.Space);
+		KeyList.Add (KeyCode.A);
+		KeyList.Add (KeyCode.S);
+		KeyList.Add (KeyCode.W);
+		KeyList.Add (KeyCode.D);
+		foreach (KeyCode tmpKey in KeyList) {
+			if (Input.GetKey(tmpKey)) {
+				GameStateScript.KeyAction(tmpKey);
+			}
+		}
+			
 		GUI.Box(new Rect(10.0f, 10.0f, 100.0f, 30.0f), "Score: " + score);
 		string livesString = "Lives: ";
 		for (int i = 0; i < numberOfLives; ++i)
