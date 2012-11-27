@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ShipScript : WrappingObjectScript
+public class ShipScript : Entity
 {
 	public Object shot;
 	public GameObject explosion;

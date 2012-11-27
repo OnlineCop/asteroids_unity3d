@@ -9,7 +9,7 @@ using System.Collections;
  * simply force its position to appear at the other.
  * @author Steve
  */
-public class WrappingObjectScript : MonoBehaviour
+public class Entity : MonoBehaviour
 {
 	private Vector3 cameraBottomLeft;
 	private Vector3 cameraTopRight;

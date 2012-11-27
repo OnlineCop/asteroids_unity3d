@@ -2,6 +2,10 @@ using UnityEngine;
 using System.Collections;
 
 
+/** @brief Asteroid event delegates */
+public delegate void DestroyAsteroidDelegate();
+
+
 /**
  * @brief All sizes of asteroids use this same script.
  * @details The smallest asteroid will spawn no other asteroids when it is
@@ -12,7 +16,7 @@ using System.Collections;
  * them when that happens.
  * @author Steve
  */
-public class AsteroidScript : WrappingObjectScript
+public class AsteroidScript : Entity
 {
 	public GameObject explosionPrefab;      // Shown when asteroid is hit/destroyed by shot
 	public GameObject asteroidPrefab;       // One of the smaller asteroids to spawn when this is destroyed (set to null if none spawned)
@@ -20,12 +24,22 @@ public class AsteroidScript : WrappingObjectScript
 	public int points;                      // Increase player's score by this much when the asteroid is destroyed
 	public float maxVelocity;               // Per-axis limiter (value is applied to all axis independently)
 	
+	private DestroyAsteroidDelegate blowItUp;
+	
 	private GameControllerScript gcs;            // Handles score, scene transitions, etc.
 	private Vector3 rotationSpeed;
 	
 	
+	public void AsteroidWasDestroyed()
+	{
+		Debug.Log("The asteroid was destroyed.");
+	}
+	
+	
 	void Start()
 	{
+		this.blowItUp = new DestroyAsteroidDelegate(AsteroidWasDestroyed);
+		
 		GameObject world = GameObject.Find("GameControllerTag");
 		if (world != null)
 		{
@@ -82,6 +96,9 @@ public class AsteroidScript : WrappingObjectScript
 	 */
 	void OnCollisionEnter()
 	{
+		// Call the DestroyAsteroidDelegate delegate
+		this.blowItUp();
+		
 		if (this.gcs != null)
 		{
 			this.gcs.AddPoints(points);

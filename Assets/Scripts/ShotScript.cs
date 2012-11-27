@@ -9,7 +9,7 @@ using System.Collections;
  * until they simply self-destruct.
  * @author Steve
  */
-public class ShotScript : WrappingObjectScript
+public class ShotScript : Entity
 {
 	public GameObject shotOwner;        // Player's ship or UFO, should not collide with its own shot
 	
