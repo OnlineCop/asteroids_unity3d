@@ -99,7 +99,7 @@ public class GameControllerScript : MonoBehaviour
 	}
 	
 	
-	void UserInputPlay()
+	public void UserInputPlay()
 	{
 		if (Input.GetKey(KeyCode.Space))
 		{
