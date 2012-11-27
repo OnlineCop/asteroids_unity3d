@@ -105,34 +105,4 @@ public static class GameStateScript
 			}
 		}
 	}
-	
-	/** @brief Key input callbacks: nice for ability to remap keys */
-	public delegate void KeyEvent();
-	
-	/** @brief Key callback GamePlay: player's ship fires shot */
-	public static event KeyEvent ShipFireShot;
-	
-	/** @brief Key callback GamePlay: player's turns counter clockwise */
-	public static event KeyEvent ShipTurnCCW;
-	
-	/** @brief Key callback GamePlay: player's ship turns clockwise */
-	public static event KeyEvent ShipTurnCW;
-	
-	/** @brief Key callback GamePlay: player's ship uses thrusters */
-	public static event KeyEvent ShipUseThrusters;
-	
-	/** @brief Key callback GameStart: player wants to start playing */
-	public static event KeyEvent UserInputPlay;
-	
-	/** @brief Asteroid event delegates */
-	public delegate void DestroyAsteroidEvent();
-	
-	/** @brief Asteroid destroyed callback */
-	public static event DestroyAsteroidEvent DestroyAsteroidListener;
-	
-	/** @brief Ship event delegates */
-	public delegate void DestroyShipEvent();
-	
-	/** @brief Ship destroyed callback */
-	public static event DestroyShipEvent DestroyShipListener;
 }

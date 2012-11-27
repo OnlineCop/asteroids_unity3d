@@ -94,17 +94,8 @@ public class GameControllerScript : MonoBehaviour
 		this.guiAsteroids = new GameObject("guiAsteroids");
 		this.guiAsteroids.transform.parent = this.objectsContainer.transform;
 		this.guiAsteroids.transform.localPosition = new Vector3(0.0f, 0.0f, 1.0f);
-
+		
 		this.GameStart();
-	}
-	
-	
-	public void UserInputPlay()
-	{
-		if (Input.GetKey(KeyCode.Space))
-		{
-			Debug.Log("SPACE was pressed during " + GameStateScript.gameState + " state.");
-		}
 	}
 	
 	
@@ -226,8 +217,23 @@ public class GameControllerScript : MonoBehaviour
 			
 			this.AddAsteroid(newAsteroid);
 		}
-		
-		GameStateScript.UserInputPlay += UserInputPlay;
+	}
+	
+	
+	/**
+	 * @brief Remove scene shown to players before an active game session.
+	 * @details This should clean up the gui text and background asteroids
+	 * before we move onto creating the player's ship, game asteroids, etc.
+	 */
+	private void GameStartCleanup()
+	{
+		Debug.Log("GameStartCleanup called");
+		int kids = this.guiElements.transform.GetChildCount();
+		for (int kid = 0; kid < kids; kid++)
+		{
+			Destroy( this.guiElements.transform.GetChild(kid).gameObject );
+		}
+		this.RemoveAllAsteroids();
 	}
 	
 	
@@ -289,7 +295,7 @@ public class GameControllerScript : MonoBehaviour
 			this.AddAsteroid(newAsteroid);
 		}
 		
-//		GameControllerScript.gamestate = GameState.
+		GameStateScript.gameState = GameState.GamePlay;
 	}
 	
 	
@@ -319,19 +325,71 @@ public class GameControllerScript : MonoBehaviour
 	}
 	
 	
-	public bool SpawnShip(GameObject newShip)
+	void Update()
 	{
-		ShipScript ship = newShip.GetComponent<ShipScript>();
+		switch (GameStateScript.gameState)
+		{
+		case GameState.GameStart:
+			// When the player presses the key, clear the playing field
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				Debug.Log("SPACE was pressed during " + GameStateScript.gameState + " state.");
+				this.GameStartCleanup();
+			}
+			
+			// When the player releases the key, start the next phase
+			if (Input.GetKeyUp(KeyCode.Space))
+			{
+				this.BeginPlay();
+			}
+			break;
+			
+		case GameState.GamePlay:
+			// While key held down, auto-fire
+			if (Input.GetKey(KeyCode.Space))
+			{
+				Debug.Log("Fire! Fire! Fire some more!");
+			}
+			if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+			{
+				Debug.Log("Thrusters! Faster, faster, faster!");
+			}
+			if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+			{
+				Debug.Log("Turn to port! That means left. Left!");
+			}
+			if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+			{
+				Debug.Log("Hard to starboard! Right? Right!");
+			}
+			break;
+			
+		case GameState.GameOver:
+			// Laugh at player and make them wait before they return to the start screen
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				Debug.Log("Yeah... let's start over now.");
+			}
+			break;
+		}
+	}
+	
+	
+	public bool SpawnShip(GameObject newShipPrefab)
+	{
+		ShipScript ship = newShipPrefab.GetComponent<ShipScript>();
 		if (ship != null)
 		{
 			
-			//Debug.Log("Added " + newShip);
+			Debug.Log("Added " + newShipPrefab);
+			GameObject newShip = Instantiate(newShipPrefab) as GameObject;
+			newShip.transform.parent = this.guiAsteroids.transform;
 			return true;
 		}
 		else
 		{
 			// 'newShip' is null or isn't a ShipScript object
-			//Debug.Log("Could not add " + newShip);
+			Debug.Log("Could not add " + newShipPrefab);
 			return false;
 		}
 	}
@@ -421,7 +479,11 @@ public class GameControllerScript : MonoBehaviour
 	
 	public void RemoveAllAsteroids()
 	{
-		//this.asteroids.RemoveAll();
+		Debug.Log("RemoveAllAsteroids called");
+		foreach (GameObject asteroid in this.asteroids)
+		{
+			Destroy( asteroid );
+		}
 	}
 	
 	
