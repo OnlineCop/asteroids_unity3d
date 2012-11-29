@@ -16,7 +16,7 @@ public delegate void DestroyAsteroidDelegate();
  * them when that happens.
  * @author Steve
  */
-public class AsteroidScript : Entity
+public class AsteroidScript : EntityScript
 {
 	public GameObject explosionPrefab;      // Shown when asteroid is hit/destroyed by shot
 	public GameObject asteroidPrefab;       // One of the smaller asteroids to spawn when this is destroyed (set to null if none spawned)
@@ -86,7 +86,7 @@ public class AsteroidScript : Entity
 	{
 		this.gameObject.transform.Rotate(this.rotationSpeed * Time.deltaTime, Space.Self);
 		
-		// From WrappingObjectScript parent class
+		// From EntityScript parent class
 		UpdateBounds();
 	}
 	

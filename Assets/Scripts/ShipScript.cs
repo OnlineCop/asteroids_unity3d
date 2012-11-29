@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ShipScript : Entity
+public class ShipScript : EntityScript
 {
 	public Object shot;
 	public GameObject explosion;
@@ -44,7 +44,7 @@ public class ShipScript : Entity
 	
 	void Update()
 	{
-		// From WrappingObjectScript parent class
+		// From EntityScript parent class
 		UpdateBounds();
 	}
 	

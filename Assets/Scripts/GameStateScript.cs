@@ -3,7 +3,7 @@ using System.Collections;
 
 
 /**
- * @brief 
+ * @brief Enumeration for game scenes
  */
 public enum GameState
 {
@@ -104,5 +104,21 @@ public static class GameStateScript
 					break;
 			}
 		}
+	}
+	
+	/** 
+	 * Called when a key is pressed.
+	 */
+	public delegate void KeyEvent(KeyCode srcKey);
+	public static event KeyEvent UserInputPlay;
+	
+	public delegate void DestroyAsteroidEvent();
+	public static event DestroyAsteroidEvent DestroyAsteroidListener;
+	
+	public delegate void DestroyShipEvent();
+	public static event DestroyShipEvent DestroyShipListener;
+	
+	public static void KeyAction(KeyCode srcKey) {
+		UserInputPlay(srcKey);
 	}
 }

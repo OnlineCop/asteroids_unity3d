@@ -9,7 +9,7 @@ using System.Collections;
  * until they simply self-destruct.
  * @author Steve
  */
-public class ShotScript : Entity
+public class ShotScript : EntityScript
 {
 	public GameObject shotOwner;        // Player's ship or UFO, should not collide with its own shot
 	
@@ -47,7 +47,7 @@ public class ShotScript : Entity
 			return;
 		}
 		
-		// From WrappingObjectScript parent class
+		// From EntityScript parent class
 		UpdateBounds();
 	}
 	
