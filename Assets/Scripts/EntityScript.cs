@@ -9,7 +9,7 @@ using System.Collections;
  * simply force its position to appear at the other.
  * @author Steve
  */
-public class Entity : MonoBehaviour
+public class EntityScript : MonoBehaviour
 {
 	private Vector3 cameraBottomLeft;
 	private Vector3 cameraTopRight;
