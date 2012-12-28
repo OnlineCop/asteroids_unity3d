@@ -24,6 +24,7 @@ public class EntityScript : MonoBehaviour
 		this.cameraBottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0.0f, 0.0f, -cameraWorldZ.z));
 		this.cameraTopRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, -cameraWorldZ.z));
 		/*
+		// Outputs: ([left],[top] - [right],[bottom])
 		Debug.Log(string.Format("({0,2:#0.00},{1,2:#0.00} - {2,2:#0.00},{3,2:#0.00})",
 		          this.cameraBottomLeft.x, this.cameraBottomLeft.y,
 		          this.cameraTopRight.x, this.cameraTopRight.y));
