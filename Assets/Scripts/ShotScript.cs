@@ -19,20 +19,19 @@ public class ShotScript : EntityScript
 	private GameControllerScript gcs;   // Handles score, scene transitions, etc.
 	
 	
+	/**
+	 * @brief Set the object's lifespan so it will self-destruct after a few seconds.
+	 */
 	void Start()
 	{
-		GameObject world = GameObject.Find("GameController");
-		if (world != null)
-		{
-			this.gcs = GameObject.FindWithTag("GameControllerTag").GetComponent<GameControllerScript>();
-		}
+		this.gcs = GameObject.Find("/GameController").GetComponent<GameControllerScript>();
+		this.gcs.AddShot(gameObject);
 		
-		if (timeToLive == 0.0f)
+		if (this.timeToLive != 2.0f)
 		{
-			timeToLive = 2.0f;
+			this.timeToLive = 2.0f;
 		}
 		this.lifetime = Time.time + this.timeToLive;
-		this.gcs.AddShot(gameObject);
 	}
 	
 	
