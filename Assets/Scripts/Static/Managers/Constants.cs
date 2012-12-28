@@ -8,21 +8,21 @@ using System.Collections;
  * camera is to test its orthographic size versus its camera aspect:
  *
  * <pre><code>
- *   Globals.screenHeight = 2.0f * mainCamera.orthographicSize;
- *   Globals.screenWidth = Globals.screenHeight * mainCamera.aspect;
+ *   Constants.screenHeight = 2.0f * mainCamera.orthographicSize;
+ *   Constants.screenWidth = Constants.screenHeight * mainCamera.aspect;
  * </code></pre>
  *
  * This would give the size only if the camera used is set up correctly for
  * orthographic mode, though.
  */
-public static class Globals
+static public class Constants
 {
 #region Screen Dimensions
-	private static float _screenWidth;
-	private static float _screenHeight;
+	static private float _screenWidth;
+	static private float _screenHeight;
 	
 	/** @brief Central location to get global screen width */
-	public static float screenWidth
+	static public float screenWidth
 	{
 		get
 		{
@@ -39,7 +39,7 @@ public static class Globals
 	}
 	
 	/** @brief Central location to get global screen height */
-	public static float screenHeight
+	static public float screenHeight
 	{
 		get
 		{
@@ -57,12 +57,12 @@ public static class Globals
 #endregion
 
 #region Asteroid Movement Speeds
-	private static float _asteroidMoveSpeedLarge  = 15.0f;
-	private static float _asteroidMoveSpeedMedium = 18.0f;
-	private static float _asteroidMoveSpeedSmall  = 20.0f;
+	static private float _asteroidMoveSpeedLarge  = 15.0f;
+	static private float _asteroidMoveSpeedMedium = 18.0f;
+	static private float _asteroidMoveSpeedSmall  = 20.0f;
 	
 	/** @brief Speed of large asteroids */
-	public static float asteroidMoveSpeedLarge
+	static public float asteroidMoveSpeedLarge
 	{
 		get
 		{
@@ -79,7 +79,7 @@ public static class Globals
 	}
 	
 	/** @brief Speed of medium asteroids */
-	public static float asteroidMoveSpeedMedium
+	static public float asteroidMoveSpeedMedium
 	{
 		get
 		{
@@ -96,7 +96,7 @@ public static class Globals
 	}
 	
 	/** @brief Speed of small asteroids */
-	public static float asteroidMoveSpeedSmall
+	static public float asteroidMoveSpeedSmall
 	{
 		get
 		{

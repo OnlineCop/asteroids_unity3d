@@ -77,10 +77,10 @@ public class GameControllerScript : MonoBehaviour
 		}
 		
 		Vector2 screenSize = this.GetFieldSize(this.mainCamera);
-		Globals.screenWidth = screenSize.x;
-		Globals.screenHeight = screenSize.y;
+		Constants.screenWidth = screenSize.x;
+		Constants.screenHeight = screenSize.y;
 		Debug.Log(string.Format("({0,2:#0.00},{1,2:#0.00})",
-		          -Globals.screenWidth/2.0f, -Globals.screenHeight/2.0f));
+		          -Constants.screenWidth/2.0f, -Constants.screenHeight/2.0f));
 		
 		// Parent container
 		this.objectsContainer = new GameObject("ObjectsContainer");
@@ -99,11 +99,12 @@ public class GameControllerScript : MonoBehaviour
 	}
 	
 	
+	/** @brief Callback for the GameStateScript.UserInputPlay event */
 	void UserInputPlay(KeyCode srcKey)
 	{
 		if (srcKey == KeyCode.Space)
 		{
-			Debug.Log("SPACE was pressed during " + GameStateScript.gameState + " state.");
+			//Debug.Log("SPACE was pressed during " + GameStateScript.gameState + " state.");
 		}
 	}
 	
@@ -164,8 +165,8 @@ public class GameControllerScript : MonoBehaviour
 		float startingZ = 0.0f;
 		for (; startingZ < (float)(numAsteroids / 3.0f); startingZ += 1.0f)
 		{
-			float startingX = (Random.value - 0.5f) * Globals.screenWidth;
-			float startingY = (Random.value - 0.5f) * Globals.screenHeight;
+			float startingX = (Random.value - 0.5f) * Constants.screenWidth;
+			float startingY = (Random.value - 0.5f) * Constants.screenHeight;
 			Vector3 pos = new Vector3(startingX, startingY, startingZ);
 			
 			GameObject newAsteroid = Instantiate(this.asteroidLargePrefab) as GameObject;
@@ -186,8 +187,8 @@ public class GameControllerScript : MonoBehaviour
 		// Resume at previous z-depth
 		for (; startingZ < (float)(numAsteroids * 2.0f / 3.0f); startingZ += 1.0f)
 		{
-			float startingX = (Random.value - 0.5f) * Globals.screenWidth;
-			float startingY = (Random.value - 0.5f) * Globals.screenHeight;
+			float startingX = (Random.value - 0.5f) * Constants.screenWidth;
+			float startingY = (Random.value - 0.5f) * Constants.screenHeight;
 			Vector3 pos = new Vector3(startingX, startingY, startingZ);
 			
 			GameObject newAsteroid = Instantiate(this.asteroidMediumPrefab) as GameObject;
@@ -208,8 +209,8 @@ public class GameControllerScript : MonoBehaviour
 		// Keep going at previous z-depth
 		for (; startingZ < (float)numAsteroids; startingZ += 1.0f)
 		{
-			float startingX = (Random.value - 0.5f) * Globals.screenWidth;
-			float startingY = (Random.value - 0.5f) * Globals.screenHeight;
+			float startingX = (Random.value - 0.5f) * Constants.screenWidth;
+			float startingY = (Random.value - 0.5f) * Constants.screenHeight;
 			Vector3 pos = new Vector3(startingX, startingY, startingZ);
 			
 			GameObject newAsteroid = Instantiate(this.asteroidSmallPrefab) as GameObject;
@@ -264,8 +265,8 @@ public class GameControllerScript : MonoBehaviour
 		// Spawn large asteroids
 		for (uint i = 0; i < this.currentLevel * 3; i++)
 		{
-			float startingX = (Random.value - 0.5f) * Globals.screenWidth;
-			float startingY = (Random.value - 0.5f) * Globals.screenHeight;
+			float startingX = (Random.value - 0.5f) * Constants.screenWidth;
+			float startingY = (Random.value - 0.5f) * Constants.screenHeight;
 			Vector3 pos = new Vector3(startingX, startingY, 0.0f);
 			
 			GameObject newAsteroid = Instantiate(this.asteroidLargePrefab) as GameObject;
@@ -286,8 +287,8 @@ public class GameControllerScript : MonoBehaviour
 		// Spawn medium asteroids
 		for (uint i = 0; i < this.currentLevel * 3; i++)
 		{
-			float startingX = (Random.value - 0.5f) * Globals.screenWidth;
-			float startingY = (Random.value - 0.5f) * Globals.screenHeight;
+			float startingX = (Random.value - 0.5f) * Constants.screenWidth;
+			float startingY = (Random.value - 0.5f) * Constants.screenHeight;
 			Vector3 pos = new Vector3(startingX, startingY, 0.0f);
 			
 			GameObject newAsteroid = Instantiate(this.asteroidMediumPrefab) as GameObject;
@@ -370,19 +371,19 @@ public class GameControllerScript : MonoBehaviour
 			// While key held down, auto-fire
 			if (Input.GetKey(KeyCode.Space))
 			{
-				Debug.Log("Fire! Fire! Fire some more!");
+				//Debug.Log("Fire! Fire! Fire some more!");
 			}
 			if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 			{
-				Debug.Log("Thrusters! Faster, faster, faster!");
+				//Debug.Log("Thrusters! Faster, faster, faster!");
 			}
 			if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
 			{
-				Debug.Log("Turn to port! That means left. Left!");
+				//Debug.Log("Turn to port! That means left. Left!");
 			}
 			if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
 			{
-				Debug.Log("Hard to starboard! Right? Right!");
+				//Debug.Log("Hard to starboard! Right? Right!");
 			}
 			break;
 			

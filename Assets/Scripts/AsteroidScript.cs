@@ -40,11 +40,7 @@ public class AsteroidScript : EntityScript
 	{
 		this.blowItUp = new DestroyAsteroidDelegate(AsteroidWasDestroyed);
 		
-		GameObject world = GameObject.Find("GameControllerTag");
-		if (world != null)
-		{
-			this.gcs = world.GetComponent<GameControllerScript>();
-		}
+		this.gcs = GameObject.Find("/GameController").GetComponent<GameControllerScript>();
 		
 		if (this.numAsteroidsToSpawn == 0)
 		{
@@ -128,11 +124,14 @@ public class AsteroidScript : EntityScript
 					newAsteroidScript.rotationSpeed = this.rotationSpeed;
 				}
 				
-				// Parent new asteroid to correct layer
-				this.gcs.AddToAsteroidsLayer(newAsteroid);
-				
-				// Add new asteroid(s) into gcs's array for management
-				this.gcs.AddAsteroid(asteroidPrefab);
+				if (this.gcs != null)
+				{
+					// Parent new asteroid to correct layer
+					this.gcs.AddToAsteroidsLayer(newAsteroid);
+					
+					// Add new asteroid(s) into gcs's array for management
+					this.gcs.AddAsteroid(asteroidPrefab);
+				}
 			}
 		}
 		
